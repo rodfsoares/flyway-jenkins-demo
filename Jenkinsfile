@@ -12,7 +12,7 @@ pipeline {
             }
 
             steps {
-                sh label: 'Build on Dev', script: "build.sh -db $DATABASE -env $DEV"
+                sh label: 'Build on Dev', script: "./build.sh -db $DATABASE -env $DEV"
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
             }
 
             steps {
-                sh label: 'Deploy to Staging environment', script: "deploy_to_stg.sh -db $DATABASE -env $STG"
+                sh label: 'Deploy to Staging environment', script: "./deploy_to_stg.sh -db $DATABASE -env $STG"
             }
         }
 
@@ -32,10 +32,10 @@ pipeline {
             }
 
             steps {
-                sh label: 'Deploy to QA environment', script: "deploy_to_qa.sh -db $DATABASE -env $QA"
+                sh label: 'Deploy to QA environment', script: "./deploy_to_qa.sh -db $DATABASE -env $QA"
             }
         }
-        
+
         stage('prd') {
             environment { 
                 PRD = "prd"
