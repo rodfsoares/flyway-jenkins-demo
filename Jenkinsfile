@@ -37,7 +37,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to QA environment', script: "./deploy_to_qa.sh -db $DATABASE -env $QA"
-                sh "./deploy_to_qa.sh -d $DATABASE -e $QA"
+                sh script: "./deploy_to_qa.sh -d $DATABASE -e $QA", label: 'Deploy to QA environment'
             }
         }
 
