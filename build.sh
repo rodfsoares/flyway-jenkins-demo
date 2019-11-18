@@ -20,4 +20,5 @@ done
 psql -d "postgres" -c "CREATE DATABASE $db-$env;"
 
 # Apply migrations
+echo "env vaiable in build.sh: $env"
 /bin/bash flyway.sh -db $db -env $env
