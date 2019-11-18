@@ -3,6 +3,7 @@ pipeline {
     
     environment { 
         DATABASE = "flyway-jenkins-demo"
+        PATH = "/usr/local/Cellar:$PATH"
     }
 
     stages {
