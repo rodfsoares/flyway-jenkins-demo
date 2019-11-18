@@ -15,7 +15,7 @@ pipeline {
             steps {
                 //sh "printenv | sort"
                 //sh label: 'Build on Dev', script: "bash ./build.sh -db $DATABASE -env $DEV"
-                sh "./build.sh -d $DATABASE -e $DEV" label: 'Build on Dev'
+                sh script: "./build.sh -d $DATABASE -e $DEV", label: 'Build on Dev'
             }
         }
 
