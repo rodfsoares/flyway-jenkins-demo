@@ -4,7 +4,7 @@ pipeline {
     environment { 
         DATABASE = "flyway-jenkins-demo"
         //PATH = "/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
-        PATH = "/usr/local/Cellar/postgresql/11.5_1/bin:/usr/local/Cellar/flyway/*/bin:$PATH"
+        PATH = "/usr/local/Cellar/postgresql/11.5_1/bin:/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
     }
 
     stages {
