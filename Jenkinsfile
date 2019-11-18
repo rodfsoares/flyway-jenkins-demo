@@ -23,7 +23,8 @@ pipeline {
             }
 
             steps {
-                sh label: 'Deploy to Staging environment', script: "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
+                //sh label: 'Deploy to Staging environment', script: "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
+                sh "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
             }
         }
 
@@ -33,7 +34,8 @@ pipeline {
             }
 
             steps {
-                sh label: 'Deploy to QA environment', script: "./deploy_to_qa.sh -db $DATABASE -env $QA"
+                //sh label: 'Deploy to QA environment', script: "./deploy_to_qa.sh -db $DATABASE -env $QA"
+                sh "./deploy_to_qa.sh -db $DATABASE -env $QA"
             }
         }
 
@@ -43,7 +45,8 @@ pipeline {
             }
 
             steps {
-                sh label: 'Deploy to Production environment', script: "deploy_to_prd.sh -db $DATABASE -env $PRD"
+                //sh label: 'Deploy to Production environment', script: "deploy_to_prd.sh -db $DATABASE -env $PRD"
+                sh "deploy_to_prd.sh -db $DATABASE -env $PRD"
             }
         }
     }

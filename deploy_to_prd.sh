@@ -16,6 +16,8 @@ while getopts ":db:env:" opt; do
   esac
 done
 
-CREATE DATABASE [IF NOT EXISTS] $db-$env;
+# Ensure DB exists
+psql -d "postgres" -c "CREATE DATABASE [IF NOT EXISTS] $db-$env;"
 
+# Apply migrations
 /bin/bash flyway.sh -db $db -env $env
