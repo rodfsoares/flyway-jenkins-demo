@@ -2,8 +2,7 @@ pipeline {
     agent any
     
     environment { 
-        DATABASE = "flyway-jenkins-demo"
-        //PATH = "/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
+        DATABASE = "flyway_jenkins_demo"
         PATH = "/usr/local/Cellar/postgresql/11.5_1/bin:/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
     }
 
@@ -14,9 +13,9 @@ pipeline {
             }
 
             steps {
-                sh "printenv | sort"
+                //sh "printenv | sort"
                 //sh label: 'Build on Dev', script: "bash ./build.sh -db $DATABASE -env $DEV"
-                sh "bash ./build.sh -db $DATABASE -env $DEV"
+                sh "./build.sh -d $DATABASE -e $DEV" label: 'Build on Dev'
             }
         }
 
@@ -27,7 +26,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to Staging environment', script: "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
-                sh "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
+                sh "bash ./deploy_to_stg.sh -d $DATABASE -e $STG"
             }
         }
 
@@ -38,7 +37,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to QA environment', script: "./deploy_to_qa.sh -db $DATABASE -env $QA"
-                sh "./deploy_to_qa.sh -db $DATABASE -env $QA"
+                sh "./deploy_to_qa.sh -d $DATABASE -e $QA"
             }
         }
 
@@ -49,7 +48,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to Production environment', script: "deploy_to_prd.sh -db $DATABASE -env $PRD"
-                sh "deploy_to_prd.sh -db $DATABASE -env $PRD"
+                sh "deploy_to_prd.sh -d $DATABASE -e $PRD"
             }
         }
     }

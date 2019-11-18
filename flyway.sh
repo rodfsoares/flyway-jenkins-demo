@@ -1,11 +1,11 @@
 #!/bin/bash
 
-while getopts ":db:env:" opt; do
+while getopts "d:e:" opt; do
   case $opt in
-    db)
+    d)
       DATABASE=${OPTARG}
       ;;
-    env)
+    e)
       ENVIRONMENT=${OPTARG}
      ;;
     \?)
@@ -16,6 +16,8 @@ while getopts ":db:env:" opt; do
   esac
 done
 
-echo "env variable in flyway.sh: $env"
-echo "ENVIRONMENT variable in flyway.sh: $ENVIRONMENT"
-flyway migrate -configFiles="flyway.conf" -url="jdbc:postgresql://localhost:5432/$DATABASE-$ENVIRONMENT"
+FULL_DATABASE_NAME=${DATABASE}_${ENVIRONMENT}
+# Ensure DB exists
+psql -d "postgres" -c "CREATE DATABASE $FULL_DATABASE_NAME;"
+
+flyway migrate -configFiles="flyway.conf" -url="jdbc:postgresql://localhost:5432/$FULL_DATABASE_NAME"

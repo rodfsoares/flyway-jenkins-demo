@@ -1,11 +1,11 @@
 #!/bin/bash
 
-while getopts ":db:env:" opt; do
+while getopts "d:e:" opt; do
   case $opt in
-    db)
+    d)
       db=${OPTARG}
       ;;
-    env)
+    e)
       env=${OPTARG}
      ;;
     \?)
@@ -16,8 +16,5 @@ while getopts ":db:env:" opt; do
   esac
 done
 
-# Ensure DB exists
-psql -d "postgres" -c "CREATE DATABASE $db-$env;"
-
 # Apply migrations
-/bin/bash flyway.sh -db $db -env $env
+/bin/bash flyway.sh -d $db -e $env
