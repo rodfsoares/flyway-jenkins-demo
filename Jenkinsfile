@@ -26,7 +26,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to Staging environment', script: "bash ./deploy_to_stg.sh -db $DATABASE -env $STG"
-                sh "bash ./deploy_to_stg.sh -d $DATABASE -e $STG"
+                sh script: "./deploy_to_stg.sh -d $DATABASE -e $STG", label: 'Deploy to STG environment'
             }
         }
 
@@ -48,7 +48,7 @@ pipeline {
 
             steps {
                 //sh label: 'Deploy to Production environment', script: "deploy_to_prd.sh -db $DATABASE -env $PRD"
-                sh "deploy_to_prd.sh -d $DATABASE -e $PRD"
+                sh script: "./deploy_to_prd.sh -d $DATABASE -e $PRD", label: 'Deploy to PRD environment'
             }
         }
     }
