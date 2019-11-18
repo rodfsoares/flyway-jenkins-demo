@@ -3,7 +3,9 @@ pipeline {
     
     environment { 
         DATABASE = "flyway-jenkins-demo"
-        PATH = "/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
+        //PATH = "/usr/local/Cellar/flyway/6.0.2/bin:$PATH"
+        PATH = "/usr/local/Cellar/flyway/*/bin:$PATH"
+        PATH = "/usr/local/Cellar/postgresql/11.5_1/bin:$PATH"
     }
 
     stages {
@@ -13,6 +15,7 @@ pipeline {
             }
 
             steps {
+                sh "printenv | sort"
                 //sh label: 'Build on Dev', script: "bash ./build.sh -db $DATABASE -env $DEV"
                 sh "bash ./build.sh -db $DATABASE -env $DEV"
             }
