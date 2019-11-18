@@ -12,6 +12,7 @@ pipeline {
             }
 
             steps {
+                sh "printenv | sort"
                 //sh label: 'Build on Dev', script: "bash ./build.sh -db $DATABASE -env $DEV"
                 sh "bash ./build.sh -db $DATABASE -env $DEV"
             }
